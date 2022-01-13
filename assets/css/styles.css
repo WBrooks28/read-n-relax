@@ -1,10 +1,65 @@
 * {
 	padding: 0;
 	margin: 0;
-	}
+  color: white;
+
+}
+
+:root {
+	--accent: #bda08a;
+  --button-checkmark: #bdd386;
+}
+
+header {
+	background-color: var(--accent);
+}
+
+.input-width {
+  width: 300px;
+}
+
+#map {
+	width: 100%;
+	height: 400px;
 	
-	#map {
-		width: 100%;
-		height: 400px;
-		background-color: grey;
-	}
+}
+
+footer {
+	background-color: var(--accent);
+}
+
+.submit-container {
+  margin-top: 5px;
+}
+
+.submit-icon{
+  display:inline-block;
+  background-color: var(--button-checkmark);
+  border-style: none;
+  color: white;
+  margin-left: 1vh;
+
+}
+
+.checkbox-container {
+  border-right: 1px solid gray;
+  padding-left:  10px;
+  padding-right:  10px;
+  padding-top: 4px;
+  background-color: #d4d4d5;
+  margin-bottom: 1.5vh;
+}
+
+.label-text {
+  color: black;
+}
+
+p {
+  width: 450px;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+ }

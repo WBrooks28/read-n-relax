@@ -1,8 +1,83 @@
-* {
+html,body {
 	padding: 0;
 	margin: 0;
-  color: white;
+  height: 100%;
 
+}
+
+.map-container {
+  height: 600px;
+  display: flex;
+}
+
+#sidebar {
+  flex-basis: 5rem;
+  flex-grow: 1;
+  padding: 1rem;
+  max-width: 30rem;
+  height: 100%;
+  box-sizing: border-box;
+  overflow: auto;
+}
+
+#map {
+  flex-basis: 0;
+  flex-grow: 4;
+  height: 620px;
+}
+
+#sidebar {
+  display: flex;
+  flex-direction: column;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin: 0 0 5px 0;
+  flex-grow: 0;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  overflow-y: scroll;
+  flex-grow: 1;
+}
+
+li {
+  background-color: #f1f1f1;
+  padding: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+
+li:nth-child(odd) {
+  background-color: #fcfcfc;
+}
+
+.results {
+  width: 100%;
+  padding: 1rem;
+  flex-grow: 0;
+  cursor: pointer;
+  background: #1a73e8;
+  font-size: 1.5rem;
+  color: white;
+  border: none;
+}
+
+button:hover {
+  color: #c5d4f0;
+}
+
+button:disabled {
+  background-color: #9fc1ee;
+  color: #c5d4f0;
+  cursor: auto;
 }
 
 :root {
@@ -18,14 +93,6 @@ header {
   width: 300px;
 }
 
-.map-container {
-  width: 100%;
-}
-
-#map {
-  width: 100%;
-  height: 565px; 
-}
 
 footer {
 	background-color: var(--accent);

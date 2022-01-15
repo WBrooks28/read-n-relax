@@ -27,7 +27,7 @@
 					Read n Relax
 				</h1>
 			</div>
-			<form class="is-form">
+			<form class="is-form" onsubmit="getCity()">
 				<div class="columns is-flex is-justify-content-center submit-container">
 					<input
 						class="input justify-content-center input-width"
@@ -40,24 +40,24 @@
 				</div>
 				<div class="is-flex is-justify-content-center">
 					<div class="checkbox-container">
-						<input class="checkbox" type="checkbox" />
-						<label class="label-text" for="box_all">All</label>
+						<input class="checkbox" type="checkbox" id="all" value="libraries+bookstores+parks+coffee" />
+						<label class="label-text" for="all">All</label>
 					</div>
 					<div class="checkbox-container">
-						<input type="checkbox" />
-						<label class="label-text" for="box_1">Libraries</label>
+						<input type="checkbox" id="libraries" value="libraries" />
+						<label class="label-text" for="libraries">Libraries</label>
 					</div>
 					<div class="checkbox-container">
-						<input type="checkbox" />
-						<label class="label-text" for="box_2">Bookstores</label>
+						<input type="checkbox" id="bookstores" value="bookstores" />
+						<label class="label-text" for="bookstores">Bookstores</label>
 					</div>
 					<div class="checkbox-container">
-						<input type="checkbox" />
-						<label class="label-text" for="box_3">Parks</label>
+						<input type="checkbox" id="parks" value="parks" />
+						<label class="label-text" for="parks">Parks</label>
 					</div>
 					<div class="checkbox-container">
-						<input type="checkbox" />
-						<label class="label-text" for="box_4">Coffee</label>
+						<input type="checkbox" id="coffee" value="coffee"/>
+						<label class="label-text" for="coffee">Coffee</label>
 					</div>
 				</div>
 			</form>
@@ -66,10 +66,9 @@
 		<!-- map goes in this section -->
 
 		<section>
-			<!--The Container for the map along with submit button-->
+			<!--The Container for the map-->
 			<div class="map-container">
 				<div id="map"></div>
-				<div class="formBlock"></div>
 			</div>
 		</section>
 		<footer class="section is-flex is-justify-content-center footer-content">
@@ -78,6 +77,8 @@
 				<small id="author"></small>
 				</div>
 		</footer>
+		<script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQyjNgRCUdgkuyAXYjvyBKMU3A2FKabeo&libraries=places&callback=initMap"></script>
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="crossorigin="anonymous"></script>
 		<script src="./assets/js/script.js"></script>
 	</body>
 </html>

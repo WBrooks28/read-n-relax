@@ -19,68 +19,107 @@ function getQuote(){
 getQuote();  
 
 function initMap() {
-    var map = new google.maps.Map(document.getElementById('map'), {
-        center: { lat: 34.397, lng: 150.644 },
-        scrollwheel: false,
-        zoom: 4
+    // Create the map.
+    const richmond = { lat: 37.4316, lng: -78.6569};
+    const map = new google.maps.Map(document.getElementById("map"), {
+      center: richmond,
+      zoom: 7,
+      mapId: "8d193001f940fde3",
     });
-}
+    // Create the places service.
+    const service = new google.maps.places.PlacesService(map);
+    let getNextPage;
+    const moreButton = document.getElementById("more");
+  
+    moreButton.onclick = function () {
+      moreButton.disabled = true;
+      if (getNextPage) {
+        getNextPage();
+      }
+    };
+  
+    // Perform a nearby search.
+    service.textSearch(
+      { location: richmond, radius: 500, query: checkboxValue},
+      (results, status, pagination) => {
+        if (status !== "OK" || !results) return;
+        console.log(results);
+        addPlaces(results, map);
+        moreButton.disabled = !pagination || !pagination.hasNextPage;
+        if (pagination && pagination.hasNextPage) {
+          getNextPage = () => {
+            // Note: nextPage will call the same handler function as the initial call
+            pagination.nextPage();
+          };
+        }
+      }
+    );
+  }
 
-function getCity() {
-    fetch(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=${checkboxValue}+richmond+virginia&key=${key}`)
-    .then(res => res.json())
-    .then(data => {
-        console.log(data)
-    })
-}
+  const placesList = document.getElementById("places");
+  var divClone = $("#places").clone();
 
-function getAll() {
-    fetch(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=libaries+richmond+virginia&key=${key}`)
-    .then(res => res.json())
-    .then(data => {
-        console.log(data)
-    })
-    fetch(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=bookstores+richmond+virginia&key=${key}`)
-    .then(res => res.json())
-    .then(data => {
-        console.log(data)
-    })
-    fetch(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=parks+richmond+virginia&key=${key}`)
-    .then(res => res.json())
-    .then(data => {
-        console.log(data)
-    })
-    fetch(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=coffee+richmond+virginia&key=${key}`)
-    .then(res => res.json())
-    .then(data => {
-        console.log(data)
-    })
-}
+  function addPlaces(places, map) {
+  
+    for (const place of places) {
+      if (place.geometry && place.geometry.location) {
+        const image = {
+          url: place.icon,
+          size: new google.maps.Size(71, 71),
+          origin: new google.maps.Point(0, 0),
+          anchor: new google.maps.Point(17, 34),
+          scaledSize: new google.maps.Size(25, 25),
+        };
+  
+        new google.maps.Marker({
+          map,
+          icon: image,
+          title: place.name,
+          position: place.geometry.location,
+        });
+  
+        const li = document.createElement("li");
+  
+        li.textContent = place.name;
+        placesList.appendChild(li);
+        li.addEventListener("click", () => {
+          map.setCenter(place.geometry.location);
+        });
+      }
+    }
+  }
 
 $(document).ready(function() {
-    $('#all').change(function () {
-        checkboxValue = $('#all').val(); 
-        console.log(checkboxValue);
-        getAll();
-     });
-     $('#libraries').change(function () {
-        checkboxValue = $('#libraries').val(); 
-        console.log(checkboxValue);
-        getCity();
-     });
-     $('#bookstores').change(function () {
-        checkboxValue = $('#bookstores').val(); 
-        console.log(checkboxValue);
-        getCity();
+    $('#libraries').change(function () {
+        if ($("#libraries").is(':checked')) {
+            checkboxValue = $("#libraries").val();
+            initMap(); 
+        } else {
+         $("#places").replaceWith(divClone);
+        }
      });
      $('#coffee').change(function () {
-        checkboxValue = $('#coffee').val(); 
-        console.log(checkboxValue);
-        getCity();
+        if ($("#coffee").is(':checked')) {
+            checkboxValue = $("#coffee").val();
+            initMap(); 
+        } else {
+         $("#places").replaceWith(divClone);
+        }
+     });
+     $('#bookstores').change(function () {
+        if ($("#bookstores").is(':checked')) {
+            checkboxValue = $("#bookstores").val();
+            initMap(); 
+        } else {
+         $("#places").replaceWith(divClone);
+        }
      });
      $('#parks').change(function () {
-        checkboxValue = $('#parks').val(); 
-        console.log(checkboxValue);
-        getCity();
+        if ($("#parks").is(':checked')) {
+            checkboxValue = $("#parks").val();
+            initMap(); 
+        } else {
+         $("#places").replaceWith(divClone);
+        }
      });
 });

@@ -123,3 +123,17 @@ $(document).ready(function() {
         }
      });
 });
+
+$('#results').on("click" ,function (results){ 
+	if (e.target.checked) { 
+  	localStorage.checked = true; 
+  } else { 
+  	localStorage.checked = false; 
+  } 
+}) 
+ 
+$( document ).ready(function() { 
+   console.log("it worked")
+	document.querySelector('#results').checked = localStorage.checked 
+   
+}); 

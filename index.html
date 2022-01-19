@@ -27,9 +27,10 @@
 					Read n Relax
 				</h1>
 			</div>
-			<form class="is-form" onsubmit="getCity()">
+			<form id="location-search" class="is-form">
 				<div class="columns is-flex is-justify-content-center submit-container">
 					<input
+						id="location-input"
 						class="input justify-content-center input-width"
 						type="text"
 						placeholder="Enter Location"
@@ -40,23 +41,48 @@
 				</div>
 				<div class="is-flex is-justify-content-center">
 					<div class="checkbox-container">
-						<input class="checkbox" type="checkbox" id="all" value="libraries+bookstores+parks+coffee" />
+						<input
+							class="checkbox"
+							type="checkbox"
+							id="all"
+							value="libraries+bookstores+parks+coffee"
+						/>
 						<label class="label-text" for="all">All</label>
 					</div>
 					<div class="checkbox-container">
-						<input type="checkbox" id="libraries" value="library" class="check-single"/>
+						<input
+							type="checkbox"
+							id="libraries"
+							value="library"
+							class="check-single"
+						/>
 						<label class="label-text" for="libraries">Libraries</label>
 					</div>
 					<div class="checkbox-container">
-						<input type="checkbox" id="bookstores" value="bookstores" class="check-single"/>
+						<input
+							type="checkbox"
+							id="bookstores"
+							value="bookstores"
+							class="check-single"
+						/>
 						<label class="label-text" for="bookstores">Bookstores</label>
 					</div>
 					<div class="checkbox-container">
-						<input type="checkbox" id="parks" value="park" class="check-single"/>
+						<input
+							type="checkbox"
+							id="parks"
+							value="park"
+							class="check-single"
+						/>
 						<label class="label-text" for="parks">Parks</label>
 					</div>
 					<div class="checkbox-container">
-						<input type="checkbox" id="coffee" value="coffee" class="check-single"/>
+						<input
+							type="checkbox"
+							id="coffee"
+							value="coffee"
+							class="check-single"
+						/>
 						<label class="label-text" for="coffee">Coffee</label>
 					</div>
 				</div>
@@ -65,25 +91,32 @@
 
 		<!-- map goes in this section -->
 
-			<!--The Container for the map-->
-			<div class="map-container">
-				<div id="map"></div>
-				<div id="sidebar">
-					<h2>Results</h2>
-					<ul id="places"></ul>
-					<button id="more" class = "results">Load more results</button>
-				  </div>
+		<!--The Container for the map-->
+		<div class="map-container">
+			<div id="map"></div>
+			<div id="sidebar">
+				<h2>Results</h2>
+				<ul id="places"></ul>
+				<button id="more" class="results">Load more results</button>
 			</div>
+		</div>
 		<footer class="section is-flex is-justify-content-center footer-content">
 			<div class="quote-box">
 				<p id="quotes"></p>
 				<small id="author"></small>
-				</div>
+			</div>
 		</footer>
-		<script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQyjNgRCUdgkuyAXYjvyBKMU3A2FKabeo&libraries=geometry,places&callback=initMap"></script>
-		<script src="https://code.jquery.com/jquery-3.6.0.min.js"integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="crossorigin="anonymous"></script>
+		<script
+			async
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQyjNgRCUdgkuyAXYjvyBKMU3A2FKabeo&libraries=geometry,places"
+		></script>
+		<script
+			src="https://code.jquery.com/jquery-3.6.0.min.js"
+			integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+			crossorigin="anonymous"
+		></script>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
 		<script src="./assets/js/script.js"></script>
 	</body>
 </html>
-
-

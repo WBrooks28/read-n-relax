@@ -14,7 +14,6 @@ let checkboxValue = "";
 
 // function that generates quote at bottom of screen
 function getQuote() {
-	// console.log("Button clicked");
 
 	fetch("https://api.quotable.io/random")
 		.then((res) => res.json())
@@ -58,7 +57,7 @@ $(".check-single").change(function () {
 
 let locationForm = document.getElementById("location-search");
 
-locationForm.addEventListener("submit", geocode);
+addressSearchEl.addEventListener("submit", geocode);
 
 function geocode(e) {
 	// prevent actual submit
@@ -85,6 +84,7 @@ function geocode(e) {
 		.catch(function (error) {
 			console.log(error);
 		});
+
 }
 
 
@@ -193,3 +193,5 @@ $(document).ready(function () {
 		}
 	});
 });
+
+initMap();

@@ -4,15 +4,17 @@ const quote = document.querySelector("#quotes");
 const author = document.querySelector("#author");
 let addressSearchEl = document.getElementById("location-search");
 let locationInputEl = document.getElementById("location-input");
-let latitude = "";
-let longitude = "";
+let latitude = 37.5407246;
+let longitude = -77.4360481;
+let map;
+
 
 // resets checkbox value
 let checkboxValue = "";
 
 // function that generates quote at bottom of screen
 function getQuote() {
-	console.log("Button clicked");
+	// console.log("Button clicked");
 
 	fetch("https://api.quotable.io/random")
 		.then((res) => res.json())
@@ -67,19 +69,17 @@ function geocode(e) {
 		.get("https://maps.googleapis.com/maps/api/geocode/json", {
 			params: {
 				address: location,
-				key: "AIzaSyAS8MYGWKX3TU_UCnZtLtasEK9sx61a4Co",
+				key: key,
 			},
 		})
 		.then(function (response) {
 			// Log full response
 			console.log(response);
 
-			let latitude = 
-				response.data.results[0].geometry.location.lat
-			
-			let longitude = 
-				response.data.results[0].geometry.location.lng
-			
+			let latitude = response.data.results[0].geometry.location.lat;
+			let longitude = response.data.results[0].geometry.location.lng;
+
+			map.panTo({ lat: latitude, lng: longitude });
 		})
 
 		.catch(function (error) {
@@ -87,10 +87,11 @@ function geocode(e) {
 		});
 }
 
+
 function initMap() {
 	// Create the map.
 	const richmond = { lat: latitude, lng: longitude };
-	const map = new google.maps.Map(document.getElementById("map"), {
+	map = new google.maps.Map(document.getElementById("map"), {
 		center: richmond,
 		zoom: 7,
 		mapId: "8d193001f940fde3",
@@ -158,10 +159,11 @@ function addPlaces(places, map) {
 }
 
 $(document).ready(function () {
+	initMap();
 	$("#libraries").change(function () {
 		if ($("#libraries").is(":checked")) {
 			checkboxValue = $("#libraries").val();
-			initMap();
+			// initMap();
 		} else {
 			$("#places").replaceWith(divClone);
 		}
@@ -169,7 +171,7 @@ $(document).ready(function () {
 	$("#coffee").change(function () {
 		if ($("#coffee").is(":checked")) {
 			checkboxValue = $("#coffee").val();
-			initMap();
+			// initMap();
 		} else {
 			$("#places").replaceWith(divClone);
 		}
@@ -177,7 +179,7 @@ $(document).ready(function () {
 	$("#bookstores").change(function () {
 		if ($("#bookstores").is(":checked")) {
 			checkboxValue = $("#bookstores").val();
-			initMap();
+			// initMap();
 		} else {
 			$("#places").replaceWith(divClone);
 		}
@@ -185,7 +187,7 @@ $(document).ready(function () {
 	$("#parks").change(function () {
 		if ($("#parks").is(":checked")) {
 			checkboxValue = $("#parks").val();
-			initMap();
+			// initMap();
 		} else {
 			$("#places").replaceWith(divClone);
 		}

@@ -1,10 +1,13 @@
+// Global variables
 const key = "AIzaSyBQyjNgRCUdgkuyAXYjvyBKMU3A2FKabeo";
-
 const quote = document.querySelector ("#quotes");
 const author = document.querySelector("#author");
+let searchAddress = document.querySelector("location-search")
 
+// resets checkbox value
 let checkboxValue = "";
 
+// function that generates quote at bottom of screen
 function getQuote(){
     console.log("Button clicked");
 
@@ -50,8 +53,36 @@ $(".check-single").change(function() {
 });
 
 
+function geocode() {
+	let location = searchAddress;
+	axios
+		.get("https://maps.googleapis.com/maps/api/geocode/json", {
+			params: {
+				address: location,
+				key: "AIzaSyAS8MYGWKX3TU_UCnZtLtasEK9sx61a4Co",
+			},
+		})
+		.then(function (response) {
+			// Log full response
+			console.log(response);
+
+			let latitude = console.log(
+				response.data.results[0].geometry.location.lat
+			);
+			let longitude = console.log(
+				response.data.results[0].geometry.location.lng
+			);
+		})
+
+		.catch(function (error) {
+			console.log(error);
+		});
+}
+
 function initMap() {
-    // Create the map.
+    
+  
+  // Create the map.
     const richmond = { lat: 37.4316, lng: -78.6569};
     const map = new google.maps.Map(document.getElementById("map"), {
       center: richmond,

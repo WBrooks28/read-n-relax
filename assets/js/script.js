@@ -163,7 +163,7 @@ $(document).ready(function () {
 	$("#libraries").change(function () {
 		if ($("#libraries").is(":checked")) {
 			checkboxValue = $("#libraries").val();
-			// initMap();
+			initMap();
 		} else {
 			$("#places").replaceWith(divClone);
 		}
@@ -171,7 +171,7 @@ $(document).ready(function () {
 	$("#coffee").change(function () {
 		if ($("#coffee").is(":checked")) {
 			checkboxValue = $("#coffee").val();
-			// initMap();
+			initMap();
 		} else {
 			$("#places").replaceWith(divClone);
 		}
@@ -179,7 +179,7 @@ $(document).ready(function () {
 	$("#bookstores").change(function () {
 		if ($("#bookstores").is(":checked")) {
 			checkboxValue = $("#bookstores").val();
-			// initMap();
+			initMap();
 		} else {
 			$("#places").replaceWith(divClone);
 		}
@@ -187,7 +187,7 @@ $(document).ready(function () {
 	$("#parks").change(function () {
 		if ($("#parks").is(":checked")) {
 			checkboxValue = $("#parks").val();
-			// initMap();
+			initMap();
 		} else {
 			$("#places").replaceWith(divClone);
 		}

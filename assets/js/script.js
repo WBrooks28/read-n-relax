@@ -4,6 +4,8 @@ const quote = document.querySelector("#quotes");
 const author = document.querySelector("#author");
 let addressSearchEl = document.getElementById("location-search");
 let locationInputEl = document.getElementById("location-input");
+let latitude = "";
+let longitude = "";
 
 // resets checkbox value
 let checkboxValue = "";
@@ -56,33 +58,7 @@ let locationForm = document.getElementById("location-search");
 
 locationForm.addEventListener("submit", geocode);
 
-// function geocode(e) {
-// 	// prevent actual submit
-// 	e.preventDefault();
-
-// 	let location = locationInputEl.value;
-// 	axios
-// 		.get("https://maps.googleapis.com/maps/api/geocode/json", {
-// 			params: {
-// 				address: location,
-// 				key: "AIzaSyAS8MYGWKX3TU_UCnZtLtasEK9sx61a4Co",
-// 			},
-// 		})
-// 		.then(function (response) {
-// 			// Log full response
-// 			console.log(response);
-
-// 			let latitude = response.data.results[0].geometry.location.lat;
-
-// 			let longitude = response.data.results[0].geometry.location.lng;
-// 		})
-
-// 		.catch(function (error) {
-// 			console.log(error);
-// 		});
-// }
-
-function initMap() {
+function geocode(e) {
 	// prevent actual submit
 	e.preventDefault();
 
@@ -98,23 +74,25 @@ function initMap() {
 			// Log full response
 			console.log(response);
 
-			let latitudeCity = response.data.results[0].geometry.location.lat;
-
-			let longitudeSearch = response.data.results[0].geometry.location.lng;
-
-			console.log(response.data.results[0].geometry.location.lat);
-			console.log(response.data.results[0].geometry.location.lng);
+			let latitude = 
+				response.data.results[0].geometry.location.lat
+			
+			let longitude = 
+				response.data.results[0].geometry.location.lng
+			
 		})
 
 		.catch(function (error) {
 			console.log(error);
 		});
+}
 
+function initMap() {
 	// Create the map.
-	const citySearch = { lat: latitudeCity, lng: longitudeSearch };
+	const richmond = { lat: latitude, lng: longitude };
 	const map = new google.maps.Map(document.getElementById("map"), {
-		center: citySearch,
-		zoom: 5,
+		center: richmond,
+		zoom: 7,
 		mapId: "8d193001f940fde3",
 	});
 	// Create the places service.
@@ -131,7 +109,7 @@ function initMap() {
 
 	// Perform a nearby search.
 	service.textSearch(
-		{ location: citySearch, radius: 5, query: checkboxValue },
+		{ location: richmond, radius: 5, query: checkboxValue },
 		(results, status, pagination) => {
 			if (status !== "OK" || !results) return;
 			console.log(results);

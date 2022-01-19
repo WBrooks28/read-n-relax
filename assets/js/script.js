@@ -16,7 +16,39 @@ function getQuote(){
         author.innerHTML = data.author;
     })};
 
-getQuote();  
+getQuote(); 
+
+//check and uncheck all checkboxes when all is changed
+$("#all").change(function() {
+  if (!$('input:checkbox').is('checked')) {
+    $('input:checkbox').prop('checked', this.checked);
+    console.log("all checked");
+  } else {
+    $('input:checkbox').prop('checked', false);
+  }
+});
+
+// uncheck all if one of the boxes is unchecked
+$(".check-single").change(function() {
+  $(".check-single").click(function () {
+    if ($(this).is(":checked")) {
+        var isAllChecked = 0;
+
+        $(".check-single").each(function() {
+            if (!this.checked)
+                isAllChecked = 1;
+        });
+
+        if (isAllChecked == 0) {
+            $("all").prop("checked", true);
+        }     
+    }
+    else {
+        $("#all").prop("checked", false);
+    }
+});
+});
+
 
 function initMap() {
     // Create the map.
@@ -40,7 +72,7 @@ function initMap() {
   
     // Perform a nearby search.
     service.textSearch(
-      { location: richmond, radius: 500, query: checkboxValue},
+      { location: richmond, radius: 5, query: checkboxValue},
       (results, status, pagination) => {
         if (status !== "OK" || !results) return;
         console.log(results);
@@ -123,17 +155,3 @@ $(document).ready(function() {
         }
      });
 });
-
-$('#results').on("click" ,function (results){ 
-	if (e.target.checked) { 
-  	localStorage.checked = true; 
-  } else { 
-  	localStorage.checked = false; 
-  } 
-}) 
- 
-$( document ).ready(function() { 
-   console.log("it worked")
-	document.querySelector('#results').checked = localStorage.checked 
-   
-}); 
